@@ -1,7 +1,18 @@
-bind status a !git add %(file)
+bind main <Ctrl-a> >git commit --fixup=%(commit)
+bind generic <Ctrl-g> @git checkout %(file)
+bind generic <Ctrl-f> >git log --follow -- %(file)
+bind main <Ctrl-r> !git rebase -i %(commit)
+bind generic v >vim %(file)
+bind generic p >git add -p %(file)
+bind status w >git diff --word-diff-regex=. %(file)
+bind status R >rm %(file)
+bind stash R >git stash drop %(stash)
 
 set main-view = id:yes commit-title:yes,refs:yes,graph:v2
-
+set line-graphics = ascii
+set ignore-case = smart-case
+set log-options = --graph --oneline
+set stash-view = date:yes,display:relative-compact commit-title:yes,graph:v1,refs:no
 
 color cursor red default bold
 color title-blur red black

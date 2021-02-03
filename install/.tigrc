@@ -1,13 +1,31 @@
+# Do a fixup
 bind main <Ctrl-a> >git commit --fixup=%(commit)
-bind generic <Ctrl-g> @git checkout %(file)
-bind generic <Ctrl-f> >git log --follow -- %(file)
-bind main <Ctrl-r> !git rebase -i %(commit)
+# Checkout a file
+bind generic <Ctrl-g> @git checkout %(file) 
+# See commit that edit this file
+bind generic <Ctrl-f> >@sh -c "git log --follow -- "%(file)" | tig --pretty=raw"
+# Rebase to a commit
+bind main <Ctrl-r> !git rebase -i %(commit)^
+# Reset hard this commit
+bind generic <Ctrl-o> !git reset --hard %(commit)
+# Edit file with vim
 bind generic v >vim %(file)
+# Patch file
 bind generic p >git add -p %(file)
-bind status w >git diff --word-diff-regex=. %(file)
-bind status R >rm %(file)
+# See word diff for inline diff
+bind status w >git diff --word-diff-regex=. --word-diff=color %(file)
+# Delete a stash
 bind stash R >git stash drop %(stash)
+# Delete a file
+bind generic R >rm %(file)
+# Cherry Pick
+bind main <Ctrl-P> !git cherry-pick %(commit)
+# See word diff commit
+bind main w >git diff --word-diff-regex=. --word-diff=color %(commit)^
 
+
+
+# View configs
 set main-view = id:yes commit-title:yes,refs:yes,graph:v2
 set line-graphics = ascii
 set ignore-case = smart-case

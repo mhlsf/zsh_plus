@@ -18,9 +18,9 @@ alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}
 alias clean-branch='git branch --merged| egrep -v "(^\*|develop|master)"'
 
 # Atlas blue
-alias check='docker exec atlas_blue_api sh -c "composer csfix && composer cscheck & composer phpstan && composer deptrac && composer yaml-lint"'
+alias check='docker exec hermes_hub_1 sh -c "composer lint:fix && composer phpstan && composer cscheck"'
 alias sshServer='ssh ubuntu@ec2-54-75-43-28.eu-west-1.compute.amazonaws.com'
-
+alias guid="python -c 'import uuid; print str(uuid.uuid1())'"
 
 #Edit commit : 
 #Rebase using Ctrl-R in tig
